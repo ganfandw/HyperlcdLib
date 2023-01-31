@@ -1,11 +1,17 @@
 package com.hyperlcd.lib.WifiManager;
 
+import static java.security.AccessController.getContext;
+
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
+import androidx.core.app.ActivityCompat;
 
 import com.hyperlcd.lib.Utils.LogUtils;
 
@@ -89,6 +95,76 @@ public class WifiControl {
         if(mWifiManager.isWifiEnabled()) {
             mWifiManager.setWifiEnabled(false);
         }
+    }
+
+    /**
+     * 无密码连接
+     * @param ssid
+     */
+    public boolean connectWifiNoPwd(String ssid){
+        mWifiManager.disableNetwork(mWifiManager.getConnectionInfo().getNetworkId());
+        mWifiManager.removeNetwork(mWifiManager.getConnectionInfo().getNetworkId());
+        int netId = mWifiManager.addNetwork(getWifiConfig(ssid, "", false));
+        LogUtils.d("---connectWifiNoPws---netId:" + netId);
+        return mWifiManager.enableNetwork(netId, true);
+    }
+    /**
+     * wifi设置
+     * @param ssid
+     * @param pwd
+     * @param isHasPws
+     */
+    private WifiConfiguration getWifiConfig(String ssid, String pwd, boolean isHasPws){
+        LogUtils.d("--getWifiConfig----");
+        WifiConfiguration config = new WifiConfiguration();
+        config.allowedAuthAlgorithms.clear();
+        config.allowedGroupCiphers.clear();
+        config.allowedKeyManagement.clear();
+        config.allowedPairwiseCiphers.clear();
+        config.allowedProtocols.clear();
+        config.SSID = "\"" + ssid + "\"";
+
+        WifiConfiguration tempConfig = isExist(ssid);
+        if(tempConfig != null) {
+            mWifiManager.removeNetwork(tempConfig.networkId);
+        }
+        if (isHasPws){
+            config.preSharedKey = "\""+pwd+"\"";
+            config.hiddenSSID = true;
+            config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
+            config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+            config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+            config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+            config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+            config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+            config.status = WifiConfiguration.Status.ENABLED;
+        }else {
+            config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        }
+        return config;
+    }
+
+    /**
+     * 得到配置好的网络连接
+     * @param ssid
+     * @return
+     */
+    public WifiConfiguration isExist(String ssid) {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        }
+        List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
+        if(0 == configs.size())
+        {
+            LogUtils.d("no save wifi configuration.");
+            return null;
+        }
+        for (WifiConfiguration config : configs) {
+            if (config.SSID.equals("\"" + ssid + "\"")) {
+                return config;
+            }
+        }
+        return null;
     }
 
 
