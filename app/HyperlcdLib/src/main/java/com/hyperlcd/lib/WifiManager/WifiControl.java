@@ -62,6 +62,34 @@ public class WifiControl {
     {
         LogUtils.d("---getWifiState---");
         return mWifiManager.getWifiState();
-        //test  999
     }
+
+    /**
+     * 获取wifi是否打开
+     * @return true为打开状态 false为关闭状态
+     */
+    public boolean isEnabled()
+    {
+        boolean enable = mWifiManager.isWifiEnabled();
+        LogUtils.d("wifi is enable:" + enable);
+        return enable;
+    }
+
+    /**打开Wifi**/
+    public void OpenWifi() {
+        LogUtils.d("open wifi");
+        if(!this.mWifiManager.isWifiEnabled()){ //当前wifi不可用
+            this.mWifiManager.setWifiEnabled(true);
+        }
+    }
+
+    /**关闭Wifi**/
+    public void closeWifi() {
+        LogUtils.d("close wifi");
+        if(mWifiManager.isWifiEnabled()) {
+            mWifiManager.setWifiEnabled(false);
+        }
+    }
+
+
 }
