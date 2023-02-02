@@ -4,7 +4,7 @@
 HyperlcdLib 是北京超显科技基于超显Android模组开发的一套方便客户进行二次开发的扩展库。拥有丰富的 Android 功能控制接口，满足客户应用快速开发需求。
 
 [![](https://jitpack.io/v/ganfandw/HyperlcdLib.svg)](https://jitpack.io/#ganfandw/HyperlcdLib)
-https://img.shields.io/github/languages/code-size/ganfandw/HyperlcdLib
+![https://img.shields.io/github/languages/code-size/ganfandw/HyperlcdLib](https://img.shields.io/github/languages/code-size/ganfandw/HyperlcdLib)
 ## 功能简介
 HyperlcdLib 提供丰富的 Android 功能控制接口，满足客户应用快速开发需求。
 
