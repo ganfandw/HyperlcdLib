@@ -18,12 +18,17 @@ import com.hyperlcd.lib.Utils.LogUtils;
 import java.util.List;
 
 /**
- * @author zhou
- * @description:Wifi功能控制类
- * @date : 2023/1/31 13:44
+ * <p>HyperlcdLib WIFI控制器类</p>
+ * </br>
+ * <p>使用该类中的接口方法必须先调用 {@link WifiControl#getInstance(Context)} (String)} 获取实例。</p>
+ * 接口功能：
+ * </br>
+ * <ol>
+ * <li>{@link WifiControl#openWifi()} 打开Wifi</li>
+ * <li>{@link WifiControl#closeWifi()} 关闭Wifi</li>
+ * </ol>
  */
 public class WifiControl {
-
     private Context mContext;
     private List<WifiConfiguration> mWifiConfigurations;
     private List<ScanResult> mWifiResultList;
@@ -56,14 +61,18 @@ public class WifiControl {
     }
 
     /**
-     * 获取wifi当前状态
-     * @return
-     *  WIFI_STATE_DISABLING（0）：正在关闭
-     *  WIFI_STATE_DISABLED（1）：已经关闭
-     *  WIFI_STATE_ENABLING（2）：正在打开
-     *  WIFI_STATE_ENABLED（3）：已经打开
-     *  WIFI_STATE_UNKNOWN（4）：未知状态
+     * @Description: [获取wifi当前状态]
+     * @Param: 无
+     * @Return: ${WIFI_STATE_DISABLING（0）：正在关闭
+     * WIFI_STATE_DISABLED（1）：已经关闭
+     * WIFI_STATE_ENABLING（2）：正在打开
+     * WIFI_STATE_ENABLED（3）：已经打开
+     * WIFI_STATE_UNKNOWN（4）：未知状态
+     * }
+     * @CreateDate: ${date} ${time}</p>
+     * @update: [序号][日期YYYY-MM-DD] [更改人姓名][变更描述]
      */
+
     public int getWifiState()
     {
         LogUtils.d("---getWifiState---");
@@ -72,6 +81,7 @@ public class WifiControl {
 
     /**
      * 获取wifi是否打开
+     * @Param null
      * @return true为打开状态 false为关闭状态
      */
     public boolean isEnabled()
@@ -82,7 +92,7 @@ public class WifiControl {
     }
 
     /**打开Wifi**/
-    public void OpenWifi() {
+    public void openWifi() {
         LogUtils.d("open wifi");
         if(!this.mWifiManager.isWifiEnabled()){ //当前wifi不可用
             this.mWifiManager.setWifiEnabled(true);
