@@ -34,15 +34,6 @@ allprojects {
 ## 更新日志
 - 2023/02/1: HyperlcdLib 1.0.0 开始更新。
 
-```
-
-### 本地 aar 依赖
-下载 aar 文件后，放到 `app/libs` 目录中，并在 `build.gradle` 中添加如下代码:
-```
-  implementation files('libs/HyperlcdLib.aar')
-```
-
-## 更新日志
 - 2023/02/2: HyperlcdLib 1.0.6 添加开机自启功能。
 
 - 2023/02/1: HyperlcdLib 1.0.5 增加Wifi功能。
