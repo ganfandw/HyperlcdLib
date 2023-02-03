@@ -1,4 +1,4 @@
-package com.hyperlcd.lib.Utils;
+package com.hyperlcd.Utils;
 
 import android.util.Log;
 
@@ -25,6 +25,10 @@ public class LogUtils {
 
     /**************************下面四个是默认tag的函数************************************/
     /**************************1个参数************************************/
+    public void setIsDebug(Boolean isDebug){
+        this.isDebug = isDebug;
+    }
+
     public static void i(String msg) {
         if (isDebug)
             Log.i(TAG, msg);

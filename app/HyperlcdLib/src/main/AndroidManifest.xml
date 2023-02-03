@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application>
         <receiver
-            android:name=".Utils.BootReceiver"
+            android:name="com.hyperlcd.Utils.BootReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

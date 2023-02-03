@@ -1,4 +1,4 @@
-package com.hyperlcd.lib.Utils;
+package com.hyperlcd.Utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,7 +29,7 @@ public class BootReceiver extends BroadcastReceiver {
             }
         }
         if (intent.getAction().equals("android.intent.action.ACTION_SHUTDOWN")){
-            Log.e("shutdown","关机了");
+            Log.e("shutdown","设备关机");
         }
     }
 }
